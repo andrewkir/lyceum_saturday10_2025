@@ -1,23 +1,19 @@
 package com.example.lyceum_saturday10_2025
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.lyceum_saturday10_2025.examples.Profile
-import com.example.lyceum_saturday10_2025.examples.model.User
+import com.example.lyceum_saturday10_2025.examples.ProfileHomework
 import com.example.lyceum_saturday10_2025.ui.theme.Lyceum_saturday10_2025Theme
-import com.example.lyceum_saturday10_2025.ui.theme.Purple40
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +25,7 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        //First commit
-                        Profile()
+                        ProfileHomework()
                     }
                 }
             }

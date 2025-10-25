@@ -1,6 +1,5 @@
 package com.example.lyceum_saturday10_2025.examples
 
-import android.widget.Space
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,11 +15,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,20 +27,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-data class Lesson(
-    val name: String,
-    val data: String,
-)
-
-val mockData = listOf(
-    Lesson("Русский язык", "25.10"),
-    Lesson("Алгебра", "26.10")
-)
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
 fun ProfileHomework() {
+    val viewmodel = viewModel<ProfileViewModel>()
+    val state by viewmodel.state.collectAsState()
+
+
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
@@ -63,7 +57,7 @@ fun ProfileHomework() {
 
             Spacer(Modifier.width(16.dp))
 
-            Text(text = "Ivan Petrov", fontSize = 24.sp)
+            Text(text = state.name, fontSize = 24.sp)
         }
 
         Spacer(Modifier.height(16.dp))
@@ -71,7 +65,7 @@ fun ProfileHomework() {
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(mockData) { lesson ->
+            items(state.lessons) { lesson ->
                 LessonRow(lesson)
             }
         }
