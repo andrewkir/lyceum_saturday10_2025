@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.padding(innerPadding)
                     ) {
+                        //First commit
                         Profile()
                     }
                 }
