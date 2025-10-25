@@ -35,7 +35,6 @@ fun ProfileHomework() {
     val viewmodel = viewModel<ProfileViewModel>()
     val state by viewmodel.state.collectAsState()
 
-
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
