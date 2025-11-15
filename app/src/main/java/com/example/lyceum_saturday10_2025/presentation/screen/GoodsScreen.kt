@@ -12,6 +12,10 @@ fun GoodsScreen() {
     val state by viewmodel.state.collectAsState()
 
     GoodsScreenContent(
-        state = state
+        state = state,
+//        onAddClicked = viewmodel::addGood
+        onAddClicked = { name, description ->
+            viewmodel.addGood(name, description)
+        }
     )
 }

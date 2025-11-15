@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class GoodsViewModel: ViewModel() {
+class GoodsViewModel : ViewModel() {
 
     private val _state = MutableStateFlow(GoodsUiState())
     val state: StateFlow<GoodsUiState>
@@ -25,7 +25,16 @@ class GoodsViewModel: ViewModel() {
     }
 
     fun addGood(name: String, description: String) {
-        //TODO
+        val goodsList = state.value.items.toMutableList()
+        goodsList.add(
+            GoodsItem(
+                name = name,
+                rating = 5,
+                description = description,
+                imageURL = ""
+            )
+        )
+        _state.value = GoodsUiState(goodsList)
     }
 
 
