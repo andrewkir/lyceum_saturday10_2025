@@ -1,4 +1,4 @@
-package com.example.lyceum_saturday10_2025.presentation.screen
+package com.example.lyceum_saturday10_2025.features.goods.presentation.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,13 +18,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.lyceum_saturday10_2025.presentation.components.GoodsCard
-import com.example.lyceum_saturday10_2025.presentation.contract.GoodsUiState
+import com.example.lyceum_saturday10_2025.features.goods.presentation.components.GoodsCard
+import com.example.lyceum_saturday10_2025.features.goods.presentation.contract.GoodsUiState
+import com.example.lyceum_saturday10_2025.features.goods.presentation.model.GoodsItem
 
 @Composable
 fun GoodsScreenContent(
     state: GoodsUiState,
     onAddClicked: (String, String) -> Unit,
+    onGoodClicked: (GoodsItem) -> Unit,
 ) {
     Column {
         var nameTextFieldValue by remember { mutableStateOf("") }
@@ -64,7 +66,7 @@ fun GoodsScreenContent(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(state.items) { item ->
-                GoodsCard(item)
+                GoodsCard(item, onGoodClicked)
             }
         }
     }
@@ -73,5 +75,5 @@ fun GoodsScreenContent(
 @Composable
 @Preview
 private fun GoodsScreenPreview() {
-    GoodsScreenContent(GoodsUiState()) { _, _ -> }
+    GoodsScreenContent(GoodsUiState(), { _, _ -> }, { _ -> })
 }

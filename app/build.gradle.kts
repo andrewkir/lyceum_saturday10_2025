@@ -58,6 +58,7 @@ dependencies {
 
     implementation(libs.coreDestinations)
     ksp(libs.kspDestinations)
+    implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

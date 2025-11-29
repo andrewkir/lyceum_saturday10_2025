@@ -12,8 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.lyceum_saturday10_2025.presentation.screen.GoodsScreen
+import com.example.lyceum_saturday10_2025.features.NavGraphs
 import com.example.lyceum_saturday10_2025.ui.theme.Lyceum_saturday10_2025Theme
+import com.ramcosta.composedestinations.DestinationsNavHost
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        GoodsScreen()
+                        DestinationsNavHost(navGraph = NavGraphs.root)
                     }
                 }
             }

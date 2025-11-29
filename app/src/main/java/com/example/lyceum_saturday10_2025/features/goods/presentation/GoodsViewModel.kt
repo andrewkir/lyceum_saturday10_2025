@@ -1,9 +1,9 @@
-package com.example.lyceum_saturday10_2025.presentation
+package com.example.lyceum_saturday10_2025.features.goods.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.lyceum_saturday10_2025.presentation.contract.GoodsUiState
-import com.example.lyceum_saturday10_2025.presentation.model.GoodsItem
+import com.example.lyceum_saturday10_2025.features.goods.presentation.contract.GoodsUiState
+import com.example.lyceum_saturday10_2025.features.goods.presentation.model.GoodsItem
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

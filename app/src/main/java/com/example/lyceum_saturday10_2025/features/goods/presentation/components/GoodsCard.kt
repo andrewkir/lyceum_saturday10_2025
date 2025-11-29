@@ -1,4 +1,4 @@
-package com.example.lyceum_saturday10_2025.presentation.components
+package com.example.lyceum_saturday10_2025.features.goods.presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,15 +18,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.example.lyceum_saturday10_2025.presentation.model.GoodsItem
+import com.example.lyceum_saturday10_2025.features.goods.presentation.model.GoodsItem
 
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun GoodsCard(
     goodsItem: GoodsItem,
+    onGoodClicked: (GoodsItem) -> Unit,
 ) {
-    Card {
+    Card(
+        onClick = {
+            onGoodClicked(goodsItem)
+        }
+    ) {
         Column {
             //Локальная картинка
 //            Image(
@@ -75,7 +80,8 @@ private fun GoodsCardPreview() {
             rating = 4,
             description = "test description",
             imageURL = ""
-        )
+        ),
+        onGoodClicked = {}
     )
 }
 
