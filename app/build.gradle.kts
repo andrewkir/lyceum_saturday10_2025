@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlinAndroidKsp)
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -53,6 +55,9 @@ dependencies {
 
     implementation(libs.glide)
     implementation(libs.glideCompose)
+
+    implementation(libs.coreDestinations)
+    ksp(libs.kspDestinations)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
