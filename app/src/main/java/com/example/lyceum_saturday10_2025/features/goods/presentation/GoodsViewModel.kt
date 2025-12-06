@@ -2,24 +2,38 @@ package com.example.lyceum_saturday10_2025.features.goods.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.lyceum_saturday10_2025.App
+import com.example.lyceum_saturday10_2025.db.Good
 import com.example.lyceum_saturday10_2025.features.goods.presentation.contract.GoodsUiState
 import com.example.lyceum_saturday10_2025.features.goods.presentation.model.GoodsItem
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class GoodsViewModel : ViewModel() {
 
+    val db = App.getDatabase()
+
     private val _state = MutableStateFlow(GoodsUiState())
     val state: StateFlow<GoodsUiState>
         get() = _state
 
     init {
+        val goodsFromDb = db
+            ?.goodsDao()
+            ?.getAllGoods()
+            ?.map { good ->
+                GoodsItem(
+                    name = good.name,
+                    rating = good.rating,
+                    description = good.description,
+                    imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSibbxABu10t0qxQWHjH-QQFSWaCgd68RbztA&s"
+                )
+            } ?: emptyList()
+
         viewModelScope.launch {
-            delay(3000)
             _state.value = GoodsUiState(
-                mockList
+                mockList + goodsFromDb
             )
         }
     }
@@ -32,6 +46,13 @@ class GoodsViewModel : ViewModel() {
                 rating = 5,
                 description = description,
                 imageURL = ""
+            )
+        )
+        db?.goodsDao()?.insert(
+            Good(
+                name = name,
+                description = description,
+                rating = 5
             )
         )
         _state.value = GoodsUiState(goodsList)

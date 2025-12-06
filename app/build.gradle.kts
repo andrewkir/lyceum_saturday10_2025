@@ -60,6 +60,9 @@ dependencies {
     ksp(libs.kspDestinations)
     implementation(libs.kotlinx.serialization.json)
 
+    implementation(libs.room)
+    ksp(libs.roomKsp)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

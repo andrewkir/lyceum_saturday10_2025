@@ -9,18 +9,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.lyceum_saturday10_2025.features.goods.presentation.model.GoodsItem
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.spec.DestinationStyle
 
 @Composable
 @Destination
 //@Destination(style = DestinationStyle.Dialog::class)
-fun GoodsDetails(goodsName: GoodsItem) {
+fun GoodsDetails(goodsItem: GoodsItem) {
     Card {
         Column(
             modifier = Modifier.padding(32.dp)
         ) {
-            Text(goodsName.name)
-            Text(goodsName.description)
+            Text(goodsItem.name)
+            Text(goodsItem.description)
         }
     }
 }
