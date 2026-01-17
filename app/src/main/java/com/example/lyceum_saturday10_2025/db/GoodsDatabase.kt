@@ -2,7 +2,6 @@ package com.example.lyceum_saturday10_2025.db
 
 import androidx.room.Dao
 import androidx.room.Database
-import androidx.room.Delete
 import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.PrimaryKey
@@ -24,6 +23,7 @@ data class Good(
     val id: Int = 0,
     val name: String,
     val description: String,
+    val imageUrl: String,
     val rating: Int,
 )
 
@@ -39,6 +39,6 @@ interface GoodDao {
     @Insert
     fun insertAll(goods: List<Good>)
 
-    @Delete
-    fun delete(good: Good)
+    @Query("DELETE FROM Good WHERE id=:id")
+    fun delete(id: Int)
 }

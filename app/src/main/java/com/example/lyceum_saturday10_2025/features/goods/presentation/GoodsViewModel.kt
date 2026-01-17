@@ -19,43 +19,45 @@ class GoodsViewModel : ViewModel() {
         get() = _state
 
     init {
+        loadData()
+    }
+
+    fun loadData() {
         val goodsFromDb = db
             ?.goodsDao()
             ?.getAllGoods()
             ?.map { good ->
                 GoodsItem(
+                    id = good.id,
                     name = good.name,
                     rating = good.rating,
                     description = good.description,
-                    imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSibbxABu10t0qxQWHjH-QQFSWaCgd68RbztA&s"
+                    imageURL = good.imageUrl
                 )
             } ?: emptyList()
 
         viewModelScope.launch {
             _state.value = GoodsUiState(
-                mockList + goodsFromDb
+                goodsFromDb
             )
         }
     }
 
-    fun addGood(name: String, description: String) {
-        val goodsList = state.value.items.toMutableList()
-        goodsList.add(
-            GoodsItem(
-                name = name,
-                rating = 5,
-                description = description,
-                imageURL = ""
-            )
-        )
+    fun addGood(name: String, description: String, imageUrl: String) {
         db?.goodsDao()?.insert(
             Good(
                 name = name,
                 description = description,
-                rating = 5
+                rating = 5,
+                imageUrl = imageUrl,
             )
         )
-        _state.value = GoodsUiState(goodsList)
+        loadData()
+    }
+
+    fun deleteGood(goodsItem: GoodsItem) {
+        db?.goodsDao()?.delete(goodsItem.id)
+        loadData()
     }
 
 

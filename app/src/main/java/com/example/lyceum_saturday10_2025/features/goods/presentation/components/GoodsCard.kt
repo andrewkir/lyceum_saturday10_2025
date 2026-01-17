@@ -1,10 +1,13 @@
 package com.example.lyceum_saturday10_2025.features.goods.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
@@ -12,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
@@ -24,10 +28,13 @@ import com.example.lyceum_saturday10_2025.features.goods.presentation.model.Good
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun GoodsCard(
+    modifier: Modifier = Modifier,
     goodsItem: GoodsItem,
     onGoodClicked: (GoodsItem) -> Unit,
+    onDeleteClicked: (GoodsItem) -> Unit,
 ) {
     Card(
+        modifier = modifier,
         onClick = {
             onGoodClicked(goodsItem)
         }
@@ -67,6 +74,18 @@ fun GoodsCard(
                 modifier = Modifier.padding(16.dp),
                 text = goodsItem.description
             )
+
+            Icon(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .padding(bottom = 16.dp)
+                    .clip(CircleShape)
+                    .clickable {
+                        onDeleteClicked(goodsItem)
+                    },
+                imageVector = Icons.Default.Delete,
+                contentDescription = null
+            )
         }
     }
 }
@@ -81,7 +100,8 @@ private fun GoodsCardPreview() {
             description = "test description",
             imageURL = ""
         ),
-        onGoodClicked = {}
+        onGoodClicked = {},
+        onDeleteClicked = {}
     )
 }
 
