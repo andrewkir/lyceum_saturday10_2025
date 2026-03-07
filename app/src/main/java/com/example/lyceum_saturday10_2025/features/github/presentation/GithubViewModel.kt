@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lyceum_saturday10_2025.features.github.data.GithubRepository
 import com.example.lyceum_saturday10_2025.features.github.presentation.model.GithubUiState
+import com.example.lyceum_saturday10_2025.features.github.presentation.model.GithubUserUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -19,7 +20,13 @@ class GithubViewModel : ViewModel() {
         viewModelScope.launch {
             _state.emit(
                 GithubUiState(
-                    repository.getUsers().map { user -> user.login }
+                    repository.getUsers().map { user ->
+                        GithubUserUi(
+                            id = user.id,
+                            login = user.login,
+                            avatarUrl = user.avatarUrl
+                        )
+                    }
                 )
             )
         }
