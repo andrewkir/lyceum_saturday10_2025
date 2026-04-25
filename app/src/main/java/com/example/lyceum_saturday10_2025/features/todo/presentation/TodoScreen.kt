@@ -1,4 +1,4 @@
-package com.example.lyceum_saturday10_2025.features.github.presentation
+package com.example.lyceum_saturday10_2025.features.todo.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -8,12 +8,14 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
-@Destination()
-fun GithubScreen(
+@Destination(start = true)
+fun TodoScreen(
     navigator: DestinationsNavigator
 ) {
-    val viewmodel = viewModel<GithubViewModel>()
+    val viewmodel = viewModel<TodoViewModel>()
     val state by viewmodel.state.collectAsState()
 
-    GithubScreenContent(state)
+    TodoScreenContent(state){ text ->
+        viewmodel.addItem(text)
+    }
 }
