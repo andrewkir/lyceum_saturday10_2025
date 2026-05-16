@@ -1,6 +1,7 @@
 package com.example.lyceum_saturday10_2025.features.todo.presentation
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.lyceum_saturday10_2025.features.todo.data.TodoRepository
 import com.example.lyceum_saturday10_2025.features.todo.presentation.model.TodoItemUi
@@ -9,9 +10,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class TodoViewModel : ViewModel() {
+class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
-    val repository = TodoRepository()
+    val repository = TodoRepository(application.applicationContext)
     private val _state = MutableStateFlow(TodoUiState())
     val state: StateFlow<TodoUiState>
         get() = _state
